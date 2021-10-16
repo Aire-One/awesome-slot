@@ -2,6 +2,7 @@
 std = "min"
 
 files[".luacheckrc"].ignore = { "111", "112", "131" }
+files["config.ld"].ignore = { "111", "113" }
 
 -- Global objects defined by the C code
 read_globals = {
