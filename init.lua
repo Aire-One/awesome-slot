@@ -28,6 +28,18 @@ local awesome_slot = {
     }
 }
 
+local function generate_id(base_id)
+    local id = base_id
+    local n = 0
+
+    while awesome_slot.slots[id] ~= nil do
+        n = n + 1
+        id = base_id .. "_#" .. n
+    end
+
+    return id
+end
+
 -- Singleton
 function awesome_slot.instance()
     if not awesome_slot._instance then
@@ -65,15 +77,7 @@ awesome_slot.slot_status = {
 }
 
 function awesome_slot:create_slot(params)
-    local id = params.id
-
-    -- Generate an id if none whas provided by the user
-    if not id then
-        id = #self.slots + 1
-        while self.slots[id] ~= nil do
-            id = id + 1
-        end
-    end
+    local id = generate_id(params.id or "UNNAMED_SLOT")
 
     local slot = {}
 
