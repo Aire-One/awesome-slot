@@ -191,3 +191,5 @@ function awesome_slot.mt:__call(params) -- luacheck: ignore unused argument self
 end
 
 return setmetatable(awesome_slot, awesome_slot.mt)
+
+-- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
