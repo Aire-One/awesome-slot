@@ -182,7 +182,7 @@ function awesome_slot:do_action (params)
     return out
 end
 
-function awesome_slot.mt:__call(params)
+function awesome_slot.mt:__call(params) -- luacheck: ignore unused argument self
     return awesome_slot.instance():do_action(params)
 end
 
