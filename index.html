@@ -1,0 +1,364 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>A declarative API to connect signals for the AwesomeWM</title>
+    <link rel="stylesheet" href="ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>awesome-slot</h1>
+
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Constructor">Constructor</a></li>
+<li><a href="#Static_functions">Static functions</a></li>
+<li><a href="#Tables">Tables</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><strong>init</strong></li>
+</ul>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>init</code></h1>
+<p>AwesomeWM - Slot</p>
+
+<p> A declarative API to connect signals for the AwesomeWM.</p>
+<p>
+
+<p> It completes the native <code>gears.signal</code> module to make signal connection
+ easier to manage.</p>
+
+<h2> Usage example</h2>
+
+<p> Tis module allows to create Slot objects. These object can connect to any
+ signals from Awesome WM's <code>gears.object</code>s and module level signals.</p>
+
+<p> In the following example, we create a slot that connects to the <code>client</code>
+ global <code>&quot;request::default_keybindings&quot;</code> signal to attach keybindings to
+ clients.</p>
+
+<p> The <code>slot.slots.client.append_keybindings</code> function is part of this module
+ and is defined as a function iterating over the <code>keybindings</code> parameter to
+ register all defined keybindings with the <code>awful.keyboard.append_client_keybindings</code>
+ function.</p>
+
+
+<pre>
+<span class="keyword">local</span> client_keybinding = slot {
+  id = <span class="string">"CLIENT_KEY_BINDINGS"</span>,
+  connect = <span class="keyword">true</span>,
+  target = capi.client,
+  signal = <span class="string">"request::default_keybindings"</span>,
+  slot = slot.slots.client.append_keybindings,
+  slot_params = {
+    keybindings = {
+      awful.key({ <span class="string">"Mod4"</span> }, <span class="string">"f"</span>,
+        <span class="keyword">function</span>(client)
+         client.fullscreen = <span class="keyword">not</span> client.fullscreen
+         client:raise()
+        <span class="keyword">end</span>,
+        { description = <span class="string">"toggle fullscreen"</span>, group = <span class="string">"client"</span> }),
+      },
+      <span class="comment">-- ...
+</span>    },
+}
+</pre>
+
+</p>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Copyright</strong>: 2021 Aire-One <a href="&#x6d;&#97;&#x69;&#108;&#x74;&#111;&#x3a;a&#105;&#x72;&#101;&#x6f;&#110;&#x65;&#64;&#x61;i&#114;&#x65;&#111;&#x6e;&#101;&#x2e;&#120;&#x79;&#122;">&#x61;&#105;&#x72;&#101;&#x6f;&#110;&#x65;&#64;&#x61;i&#114;&#x65;&#111;&#x6e;&#101;&#x2e;x&#121;&#x7a;</a></li>
+        <li><strong>Author</strong>: Aire-One</li>
+    </ul>
+
+
+<h2><a href="#Constructor">Constructor</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#awesome_slot">awesome_slot</a></td>
+	<td class="summary">Create a new Slot instance.</td>
+	</tr>
+</table>
+<h2><a href="#Static_functions">Static functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#awesome_slot.get_slot">awesome_slot.get_slot</a></td>
+	<td class="summary">Find a previously registered slot.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awesome_slot.remove">awesome_slot.remove</a></td>
+	<td class="summary">Remove a registered slot and disconnect it.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awesome_slot.connect">awesome_slot.connect</a></td>
+	<td class="summary">Connect a slot to its signal.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awesome_slot.disconnect">awesome_slot.disconnect</a></td>
+	<td class="summary">Disconnect a slot from its signal.</td>
+	</tr>
+</table>
+<h2><a href="#Tables">Tables</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#awesome_slot.slots">awesome_slot.slots</a></td>
+	<td class="summary">Slots defined by this module.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awesome_slot.static_connect">awesome_slot.static_connect</a></td>
+	<td class="summary">Special objects that require a static connection instead of object level connection.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Constructor"></a>Constructor</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "awesome_slot"></a>
+    <strong>awesome_slot</strong>
+    <a style="float:right;" href="source/init.lua.html#116">line 116</a>
+    </dt>
+    <dd>
+    Create a new Slot instance.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">params</span>
+
+
+        <ul>
+        <li><span class="parameter">id</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         The slot ID.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">target</span>
+            <span class="types"><span class="type">any</span></span>
+         The slot target object.
+        </li>
+        <li><span class="parameter">signal</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         The signal the slot connects to.
+        </li>
+        <li><span class="parameter">slot</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback function to connect to the signal.
+        </li>
+        <li><span class="parameter">slot_params</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+         The parameters to pass to the callback
+   function. (The signal will invok the callback function with this table as
+   parameter)
+        </li>
+        <li><span class="parameter">connect</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Connect the slot now.
+         (<em>default</em> false)
+        </li>
+        </li></ul>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Static_functions"></a>Static functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "awesome_slot.get_slot"></a>
+    <strong>awesome_slot.get_slot</strong>
+    <a style="float:right;" href="source/init.lua.html#95">line 95</a>
+    </dt>
+    <dd>
+    Find a previously registered slot. </p>
+
+<p> If the slot asked doesn't exist, the function will fail and throw an error.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">slot</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">Slot</span></span>
+         The slot id or instance to find.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awesome_slot.remove"></a>
+    <strong>awesome_slot.remove</strong>
+    <a style="float:right;" href="source/init.lua.html#147">line 147</a>
+    </dt>
+    <dd>
+    Remove a registered slot and disconnect it.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">slot</span>
+            <span class="types"><span class="type">Slot</span></span>
+         The slot to remove.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awesome_slot.connect"></a>
+    <strong>awesome_slot.connect</strong>
+    <a style="float:right;" href="source/init.lua.html#162">line 162</a>
+    </dt>
+    <dd>
+    Connect a slot to its signal.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">slot</span>
+            <span class="types"><span class="type">Slot</span></span>
+         The slot to connect.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awesome_slot.disconnect"></a>
+    <strong>awesome_slot.disconnect</strong>
+    <a style="float:right;" href="source/init.lua.html#184">line 184</a>
+    </dt>
+    <dd>
+    Disconnect a slot from its signal.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">slot</span>
+            <span class="types"><span class="type">Slot</span></span>
+         The slot to disconnect.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Tables"></a>Tables</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "awesome_slot.slots"></a>
+    <strong>awesome_slot.slots</strong>
+    <a style="float:right;" href="source/init.lua.html#59">line 59</a>
+    </dt>
+    <dd>
+    Slots defined by this module.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awesome_slot.static_connect"></a>
+    <strong>awesome_slot.static_connect</strong>
+    <a style="float:right;" href="source/init.lua.html#63">line 63</a>
+    </dt>
+    <dd>
+    Special objects that require a static connection instead of object level connection.
+
+
+    <h3>Fields:</h3>
+    <ul>
+        <li><span class="parameter">client</span>
+
+
+
+        </li>
+        <li><span class="parameter">screen</span>
+
+
+
+        </li>
+        <li><span class="parameter">tag</span>
+
+
+
+        </li>
+        <li><span class="parameter">ruled_client</span>
+
+
+
+        </li>
+        <li><span class="parameter">ruled_notification</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2021-10-21 17:48:08 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
