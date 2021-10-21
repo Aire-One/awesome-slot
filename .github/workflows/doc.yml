@@ -1,0 +1,28 @@
+name: Build doc
+
+on:
+  release:
+    type: [created]
+  workflow_dispatch:
+
+jobs:
+  main:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+    - name: Prepare Lua
+      uses: leafo/gh-actions-lua@v8.0.0
+      with:
+        luaVersion: "5.3"
+    - name: Prepare Luarocks
+      uses: leafo/gh-actions-luarocks@v4.0.0
+    - name: Install ldoc rocks
+      run: luarocks install ldoc
+    - name: Run ldoc
+      run: ldoc . 
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@4.1.5
+      with:
+        branch: gh-pages
+        folder: doc
