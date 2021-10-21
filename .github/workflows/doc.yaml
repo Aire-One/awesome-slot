@@ -2,7 +2,8 @@ name: Build doc
 
 on:
   push:
-    branches: [$default-branch]
+    branches:
+      - $default-branch
   workflow_dispatch:
 
 permissions:
@@ -10,7 +11,8 @@ permissions:
   pages: write
   id-token: write
 
-# Cancel the previous run if it's still in progress
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
   cancel-in-progress: false
@@ -19,13 +21,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Generate docs with LDoc
-        uses: lunarmodules/ldoc@v1.5.0
-      - name: Upload static files as artifact
+      - uses: actions/checkout@v4
+      - uses: lunarmodules/ldoc@v1.5.0
+      - uses: actions/upload-pages-artifact@v3
         id: deployment
-        uses: actions/upload-pages-artifact@v3
         with:
           path: doc/
   deploy:
@@ -35,6 +34,5 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy to GitHub Pages
+      - uses: actions/deploy-pages@v4
         id: deployment
-        uses: actions/deploy-pages@v4
