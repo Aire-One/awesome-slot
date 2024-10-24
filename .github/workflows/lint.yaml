@@ -1,0 +1,43 @@
+name: Lint
+
+on:
+  push:
+    branches:
+      - $default-branch
+  pull_request:
+
+jobs:
+  luacheck:
+    needs: []
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: lunarmodules/luacheck@v1
+
+  stylua:
+    needs: []
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: JohnnyMorganz/stylua-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: v0.20.0
+          args: --check .
+
+  ldoc:
+    needs: []
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: lunarmodules/ldoc@v1.5.0
+        with:
+          args: --fatalwarnings .
+
+  spellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: streetsidesoftware/cspell-action@v6
+        with:
+          incremental_files_only: false
