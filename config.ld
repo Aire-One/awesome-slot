@@ -14,10 +14,10 @@ sort_modules = true
 not_luadoc = true
 
 file = {
-    "init.lua",
-    exclude = {
-        "slots",
-    },
+   "src/awesome-slot",
+   exclude = {
+      "src/awesome-slot/slots",
+   },
 }
 
 -- Define some new ldoc tags from the AwesomeWM doc

@@ -46,43 +46,43 @@
 local gtable = require "gears.table"
 
 local capi = {
-    client = _G.client,
-    screen = _G.screen,
-    tag = _G.tag,
+   client = _G.client,
+   screen = _G.screen,
+   tag = _G.tag,
 }
 
 local awesome_slot = {
-    mt = {},
+   mt = {},
 
-    --- Slots defined by this module.
-    -- @table awesome_slot.slots
-    slots = require "awesome-slot.slots",
+   --- Slots defined by this module.
+   -- @table awesome_slot.slots
+   slots = require "awesome-slot.slots",
 
-    --- Special objects that require a static connection instead of object level connection.
-    -- @table awesome_slot.static_connect
-    static_connect = {
-        client = capi.client,
-        screen = capi.screen,
-        tag = capi.tag,
-        ruled_client = require "ruled.client",
-        ruled_notification = require "ruled.notification",
-    },
+   --- Special objects that require a static connection instead of object level connection.
+   -- @table awesome_slot.static_connect
+   static_connect = {
+      client = capi.client,
+      screen = capi.screen,
+      tag = capi.tag,
+      ruled_client = require "ruled.client",
+      ruled_notification = require "ruled.notification",
+   },
 
-    _private = {
-        registered_slots = {},
-    },
+   _private = {
+      registered_slots = {},
+   },
 }
 
 local function generate_id(base_id)
-    local id = base_id
-    local n = 0
+   local id = base_id
+   local n = 0
 
-    while awesome_slot.slots[id] ~= nil do
-        n = n + 1
-        id = base_id .. "_#" .. n
-    end
+   while awesome_slot.slots[id] ~= nil do
+      n = n + 1
+      id = base_id .. "_#" .. n
+   end
 
-    return id
+   return id
 end
 
 --- Find a previously registered slot.
@@ -93,11 +93,11 @@ end
 -- @treturn Slot The slot.
 -- @staticfct awesome_slot.get_slot
 function awesome_slot.get_slot(slot)
-    assert(slot)
-    local id = type(slot) == "string" and slot or slot.id
-    assert(id, "Slot not found!")
+   assert(slot)
+   local id = type(slot) == "string" and slot or slot.id
+   assert(id, "Slot not found!")
 
-    return awesome_slot._private.registered_slots[id]
+   return awesome_slot._private.registered_slots[id]
 end
 
 --- Create a new Slot instance.
@@ -114,30 +114,30 @@ end
 -- @treturn Slot The created Slot instance.
 -- @constructorfct awesome_slot
 function awesome_slot.create(params)
-    local slot = {}
+   local slot = {}
 
-    slot.id = generate_id(params.id or "UNNAMED_SLOT")
-    slot.target = params.target
-    slot.signal = params.signal
-    slot.connected = false
+   slot.id = generate_id(params.id or "UNNAMED_SLOT")
+   slot.target = params.target
+   slot.signal = params.signal
+   slot.connected = false
 
-    if params.slot_params then
-        slot.params = params.slot_params
-        slot.callback = function()
-            params.slot(slot.params)
-        end
-    else
-        slot.callback = params.slot
-    end
+   if params.slot_params then
+      slot.params = params.slot_params
+      slot.callback = function()
+         params.slot(slot.params)
+      end
+   else
+      slot.callback = params.slot
+   end
 
-    -- Insert the new slot into the slots list
-    awesome_slot._private.registered_slots[slot.id] = slot
+   -- Insert the new slot into the slots list
+   awesome_slot._private.registered_slots[slot.id] = slot
 
-    if params.connect then
-        awesome_slot.connect(slot)
-    end
+   if params.connect then
+      awesome_slot.connect(slot)
+   end
 
-    return slot
+   return slot
 end
 
 --- Remove a registered slot and disconnect it.
@@ -145,13 +145,13 @@ end
 -- @tparam Slot slot The slot to remove.
 -- @staticfct awesome_slot.remove
 function awesome_slot.remove(slot)
-    local s = awesome_slot.get_slot(slot)
+   local s = awesome_slot.get_slot(slot)
 
-    if s.connected then
-        awesome_slot.disconnect_slot(s)
-    end
+   if s.connected then
+      awesome_slot.disconnect_slot(s)
+   end
 
-    awesome_slot._private.registered_slots[s.id] = nil
+   awesome_slot._private.registered_slots[s.id] = nil
 end
 
 --- Connect a slot to its signal.
@@ -160,20 +160,20 @@ end
 -- @treturn Slot The slot.
 -- @staticfct awesome_slot.connect
 function awesome_slot.connect(slot)
-    local s = awesome_slot.get_slot(slot)
+   local s = awesome_slot.get_slot(slot)
 
-    -- Some modules expose a static connect_signals function
-    -- at the module level, while other tables/objects inheriting from
-    -- gears.object implement the signal connection API at the instance level.
-    if gtable.hasitem(awesome_slot.static_connect, s.target) then
-        s.target.connect_signal(s.signal, s.callback)
-    else
-        s.target:connect_signal(s.signal, s.callback)
-    end
+   -- Some modules expose a static connect_signals function
+   -- at the module level, while other tables/objects inheriting from
+   -- gears.object implement the signal connection API at the instance level.
+   if gtable.hasitem(awesome_slot.static_connect, s.target) then
+      s.target.connect_signal(s.signal, s.callback)
+   else
+      s.target:connect_signal(s.signal, s.callback)
+   end
 
-    s.connected = true
+   s.connected = true
 
-    return s
+   return s
 end
 
 --- Disconnect a slot from its signal.
@@ -182,22 +182,22 @@ end
 -- @treturn Slot The slot.
 -- @staticfct awesome_slot.disconnect
 function awesome_slot.disconnect(slot)
-    local s = awesome_slot.get_slot(slot)
+   local s = awesome_slot.get_slot(slot)
 
-    -- Please check the `:connect_slot` method to understand why we do this.
-    if gtable.hasitem(awesome_slot.static_connect, s.target) then
-        s.target.disconnect_slot(s.signal, s.callback)
-    else
-        s.target:disconnect_slot(s.signal, s.callback)
-    end
+   -- Please check the `:connect_slot` method to understand why we do this.
+   if gtable.hasitem(awesome_slot.static_connect, s.target) then
+      s.target.disconnect_slot(s.signal, s.callback)
+   else
+      s.target:disconnect_slot(s.signal, s.callback)
+   end
 
-    s.connected = false
+   s.connected = false
 
-    return s
+   return s
 end
 
 function awesome_slot.mt:__call(...) -- luacheck: ignore unused argument self
-    return awesome_slot.create(...)
+   return awesome_slot.create(...)
 end
 
 return setmetatable(awesome_slot, awesome_slot.mt)
