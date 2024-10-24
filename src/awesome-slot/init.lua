@@ -108,7 +108,7 @@ end
 -- @tparam string params.signal The signal the slot connects to.
 -- @tparam function params.slot The callback function to connect to the signal.
 -- @tparam table params.slot_params The parameters to pass to the callback
---   function. (The signal will invok the callback function with this table as
+--   function. (The signal will invoke the callback function with this table as
 --   parameter)
 -- @tparam[opt=false] boolean params.connect Connect the slot now.
 -- @treturn Slot The created Slot instance.
@@ -201,5 +201,3 @@ function awesome_slot.mt:__call(...) -- luacheck: ignore unused argument self
 end
 
 return setmetatable(awesome_slot, awesome_slot.mt)
-
--- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
