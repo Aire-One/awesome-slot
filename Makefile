@@ -15,7 +15,10 @@ ldoc-dryrun:
 cspell:
 	cspell lint .
 
-lint: luacheck stylua ldoc-dryrun cspell
+lint-rockspec:
+	luarocks lint awesome-slot-dev-1.rockspec
+
+lint: luacheck stylua ldoc-dryrun cspell lint-rockspec
 
 ldoc:
 	ldoc .

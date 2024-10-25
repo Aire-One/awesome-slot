@@ -1,3 +1,4 @@
+rockspec_format = "3.0"
 package = "awesome-slot"
 version = "dev-1"
 source = {
@@ -8,6 +9,11 @@ description = {
    detailed = "A declarative API to connect signals for the AwesomeWM.",
    homepage = "https://github.com/Aire-One/awesome-slot",
    license = "*** please specify a license ***",
+   labels = {
+      "awesome",
+      "signals",
+      "declarative",
+   },
 }
 build = {
    type = "builtin",

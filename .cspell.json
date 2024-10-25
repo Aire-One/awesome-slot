@@ -6,6 +6,7 @@
   "enableGlobDot": true,
   "words": [
     "Aire-One",
+    "apikey",
     "capi",
     "constructorfct",
     "dbus",
@@ -17,6 +18,7 @@
     "JohnnyMorganz",
     "keygrabber",
     "ldoc",
+    "leafo",
     "luacheck",
     "luacheckrc",
     "luadoc",
@@ -26,6 +28,7 @@
     "mousebindings",
     "mousegrabber",
     "rockspec",
+    "rockspecs",
     "staticfct",
     "stylua"
   ]
