@@ -2,7 +2,9 @@
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
   "version": "0.2",
   "useGitignore": true,
-  "ignorePaths": [".git"],
+  "ignorePaths": [
+    ".git"
+  ],
   "enableGlobDot": true,
   "words": [
     "Aire-One",
@@ -15,8 +17,10 @@
     "fatalwarnings",
     "fullscreen",
     "hasitem",
+    "ipairs",
     "JohnnyMorganz",
     "keygrabber",
+    "keygroup",
     "ldoc",
     "leafo",
     "luacheck",
@@ -24,7 +28,9 @@
     "luadoc",
     "luarocks",
     "lunarmodules",
+    "metamethod",
     "mktemp",
+    "mousebinding",
     "mousebindings",
     "mousegrabber",
     "rockspec",

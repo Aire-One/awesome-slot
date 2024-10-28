@@ -3,6 +3,7 @@ std = "min"
 cache = true
 
 include_files = {
+   ".busted",
    ".luacheckrc",
    "*.rockspec",
    "src/",

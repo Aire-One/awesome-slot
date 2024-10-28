@@ -1,9 +1,12 @@
 rockspec_format = "3.0"
+
 package = "awesome-slot"
 version = "dev-1"
+
 source = {
    url = "git+https://github.com/Aire-One/awesome-slot.git",
 }
+
 description = {
    summary = "A declarative API to connect signals for the AwesomeWM.",
    detailed = "A declarative API to connect signals for the AwesomeWM.",
@@ -15,6 +18,8 @@ description = {
       "declarative",
    },
 }
+
+-- TODO: Build Teal files
 build = {
    type = "builtin",
    modules = {
@@ -28,4 +33,12 @@ build = {
    copy_directories = {
       "doc",
    },
+}
+
+test_dependencies = {
+   "busted-tl",
+}
+
+test = {
+   type = "busted",
 }

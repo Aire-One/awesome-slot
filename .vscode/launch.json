@@ -1,0 +1,25 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    // {
+    //   "name": "Debug",
+    //   "type": "lua-local",
+    //   "request": "launch",
+    //   "program": {
+    //     "command": "just"
+    //   },
+    //   "args": ["run"],
+    //   "scriptFiles": ["${workspaceFolder}/**/*.tl"]
+    // },
+    {
+      "name": "Debug specs",
+      "type": "lua-local",
+      "request": "launch",
+      "program": {
+        "command": "make"
+      },
+      "args": ["test"],
+      "scriptFiles": ["${workspaceFolder}/**/*.tl"]
+    }
+  ]
+}

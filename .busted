@@ -1,0 +1,23 @@
+if os.getenv "LOCAL_LUA_DEBUGGER_VSCODE" == "1" then
+   require("lldebugger").start()
+end
+
+require("tl").loader()
+
+local function lua_module_paths(module_base_path)
+   local paths = (module_base_path .. "/?.lua;") .. (module_base_path .. "/?/init.lua;")
+
+   return paths
+end
+
+return {
+   _all = {
+      -- lua_module_paths "/usr/share/awesome/lib" ..
+      lpath = lua_module_paths "types" .. lua_module_paths "src",
+      loaders = { "teal" },
+      helper = "spec/helper.lua",
+   },
+   coverage = {
+      coverage = true,
+   },
+}

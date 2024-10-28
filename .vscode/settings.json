@@ -8,8 +8,10 @@
   },
   "stylua.targetReleaseVersion": "latest",
   "files.associations": {
+    ".busted": "lua",
     ".luacheckrc": "lua",
     "*.rockspec": "lua",
     "config.ld": "lua"
-  }
+  },
+  "debug.allowBreakpointsEverywhere": true
 }
