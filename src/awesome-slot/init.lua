@@ -186,9 +186,9 @@ function awesome_slot.disconnect(slot)
 
    -- Please check the `:connect_slot` method to understand why we do this.
    if gtable.hasitem(awesome_slot.static_connect, s.target) then
-      s.target.disconnect_slot(s.signal, s.callback)
+      s.target.disconnect_signal(s.signal, s.callback)
    else
-      s.target:disconnect_slot(s.signal, s.callback)
+      s.target:disconnect_signal(s.signal, s.callback)
    end
 
    s.connected = false

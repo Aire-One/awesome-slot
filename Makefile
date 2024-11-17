@@ -22,3 +22,6 @@ lint: luacheck stylua ldoc-dryrun cspell lint-rockspec
 
 ldoc:
 	ldoc .
+
+test:
+	luarocks test
