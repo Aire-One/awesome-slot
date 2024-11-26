@@ -120,14 +120,8 @@ function awesome_slot.create(params)
    slot.target = params.target
    slot.signal = params.signal
    slot.connected = false
-
-   if params.slot_params then
-      slot.params = params.slot_params
-      slot.callback = function()
-         params.slot(slot.params)
-      end
-   else
-      slot.callback = params.slot
+   slot.callback = function(...)
+      params.slot(params.slot_params)(...)
    end
 
    -- Insert the new slot into the slots list

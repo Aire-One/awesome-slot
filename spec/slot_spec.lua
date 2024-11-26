@@ -2,8 +2,16 @@ local slot = require "awesome-slot"
 
 local function new_target()
    return {
-      connect_signal = spy.new(function() end),
-      disconnect_signal = spy.new(function() end),
+      signal = nil, -- Only need to bind 1 signal in the tests
+      connect_signal = function(self, _signal_name, signal_callback)
+         self.signal = signal_callback
+      end,
+      disconnect_signal = function()
+         -- Unimplemented
+      end,
+      emit_signal = function(self, _signal_name, ...)
+         self.signal(...)
+      end,
    }
 end
 
@@ -120,5 +128,48 @@ describe("Awesome-slot", function()
       }
 
       assert.is_not_nil(s.id)
+   end)
+
+   it("should manage slot parameters", function()
+      local target = new_target()
+      local signal_name = "signal"
+      local params = { key = "value" }
+      local callback = spy.new(function(p)
+         return function()
+            assert.same(params, p)
+         end
+      end)
+
+      slot {
+         target = target,
+         signal = signal_name,
+         slot = callback,
+         slot_params = params,
+         connect = true,
+      }
+
+      target:emit_signal(signal_name)
+      assert.spy(callback).called()
+   end)
+
+   it("should retrieve signal parameters", function()
+      local target = new_target()
+      local signal_name = "signal"
+      local callback = spy.new(function()
+         return function(a, b, c)
+            assert.equal(a, 1)
+            assert.equal(b, 2)
+            assert.equal(c, 3)
+         end
+      end)
+
+      slot {
+         target = target,
+         signal = signal_name,
+         slot = callback,
+         connect = true,
+      }
+
+      target:emit_signal(signal_name, 1, 2, 3)
    end)
 end)
