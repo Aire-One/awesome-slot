@@ -6,6 +6,7 @@ include_files = {
    ".busted",
    ".luacheckrc",
    "*.rockspec",
+   "spec/",
    "src/",
    "config.ld",
 }
