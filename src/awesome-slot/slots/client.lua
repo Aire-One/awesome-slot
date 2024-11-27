@@ -1,18 +1,17 @@
+local keyboard = require "awful.keyboard"
+local mouse = require "awful.mouse"
+
 local client_slots = {}
 
 function client_slots.append_mousebindings(params)
-   local mouse = require "awful.mouse"
-
-   for _, bindings in pairs(params.mousebindings) do
-      mouse.append_client_mousebindings(bindings)
+   return function()
+      mouse.append_client_mousebindings(params.mousebindings)
    end
 end
 
 function client_slots.append_keybindings(params)
-   local keyboard = require "awful.keyboard"
-
-   for _, bindings in pairs(params.keybindings) do
-      keyboard.append_client_keybindings(bindings)
+   return function()
+      keyboard.append_client_keybindings(params.keybindings)
    end
 end
 

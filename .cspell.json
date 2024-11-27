@@ -2,7 +2,9 @@
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
   "version": "0.2",
   "useGitignore": true,
-  "ignorePaths": [".git"],
+  "ignorePaths": [
+    ".git"
+  ],
   "enableGlobDot": true,
   "words": [
     "Aire-One",
@@ -14,7 +16,9 @@
     "dryrun",
     "fatalwarnings",
     "fullscreen",
+    "halign",
     "hasitem",
+    "imagebox",
     "JohnnyMorganz",
     "keygrabber",
     "ldoc",
@@ -30,6 +34,7 @@
     "rockspec",
     "rockspecs",
     "staticfct",
-    "stylua"
+    "stylua",
+    "wibox"
   ]
 }
