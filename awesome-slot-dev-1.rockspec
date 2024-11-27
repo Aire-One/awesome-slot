@@ -19,6 +19,10 @@ description = {
    },
 }
 
+dependencies = {
+   "lua >= 5.1, < 5.5",
+}
+
 build = {
    type = "builtin",
    modules = {
