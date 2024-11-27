@@ -110,7 +110,7 @@ end
 -- @tparam table params.slot_params The parameters to pass to the callback
 --   function. (The signal will invoke the callback function with this table as
 --   parameter)
--- @tparam[opt=false] boolean params.connect Connect the slot now.
+-- @tparam[opt=true] boolean params.connect Connect the slot now.
 -- @treturn Slot The created Slot instance.
 -- @constructorfct awesome_slot
 function awesome_slot.create(params)
@@ -127,7 +127,7 @@ function awesome_slot.create(params)
    -- Insert the new slot into the slots list
    awesome_slot._private.registered_slots[slot.id] = slot
 
-   if params.connect then
+   if params.connect == nil or params.connect then
       awesome_slot.connect(slot)
    end
 
@@ -142,7 +142,7 @@ function awesome_slot.remove(slot)
    local s = awesome_slot.get_slot(slot)
 
    if s.connected then
-      awesome_slot.disconnect_slot(s)
+      awesome_slot.disconnect(s)
    end
 
    awesome_slot._private.registered_slots[s.id] = nil

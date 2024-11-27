@@ -41,21 +41,33 @@ describe("Awesome-slot", function()
 
       slot.remove(s)
 
+      assert.is_false(s.connected) -- remove should also invoke disconnect_signal
       assert.is_nil(slot.get_slot(s))
    end)
 
-   it("should connect slot (from constructor parameters)", function()
+   it("should automatically connect slot", function()
       local target = new_target()
 
       local s = slot {
          target = target,
          signal = "signal",
          slot = function() end,
-         slot_params = { key = "value" },
-         connect = true,
       }
 
       assert.is_true(s.connected)
+   end)
+
+   it("should prevent slot connection with parameter", function()
+      local target = new_target()
+
+      local s = slot {
+         target = target,
+         signal = "signal",
+         slot = function() end,
+         connect = false,
+      }
+
+      assert.is_false(s.connected)
    end)
 
    it("should connect signal", function()
@@ -66,6 +78,7 @@ describe("Awesome-slot", function()
          signal = "signal",
          slot = function() end,
          slot_params = { key = "value" },
+         connect = false,
       }
 
       slot.connect(s)
