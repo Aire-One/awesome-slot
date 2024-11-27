@@ -1,3 +1,9 @@
+-- Enable lua-local-debugger
+-- https://github.com/tomblind/local-lua-debugger-vscode
+if os.getenv "LOCAL_LUA_DEBUGGER_VSCODE" == "1" then
+   require("lldebugger").start()
+end
+
 -- Fake awesome modules
 package.loaded["gears.table"] = {
    hasitem = function(t, item)
