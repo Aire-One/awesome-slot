@@ -23,7 +23,6 @@ describe("Awesome-slot", function()
          target = target,
          signal = "signal",
          slot = function() end,
-         slot_params = { key = "value" },
       }
 
       assert.is_not_nil(s)
@@ -36,7 +35,6 @@ describe("Awesome-slot", function()
          target = target,
          signal = "signal",
          slot = function() end,
-         slot_params = { key = "value" },
       }
 
       slot.remove(s)
@@ -93,8 +91,6 @@ describe("Awesome-slot", function()
          target = target,
          signal = "signal",
          slot = function() end,
-         slot_params = { key = "value" },
-         connect = true,
       }
 
       slot.disconnect(s)
@@ -109,7 +105,6 @@ describe("Awesome-slot", function()
          target = target,
          signal = "signal",
          slot = function() end,
-         slot_params = { key = "value" },
       }
 
       assert.is_not_nil(slot.get_slot(s))
@@ -124,7 +119,6 @@ describe("Awesome-slot", function()
          target = target,
          signal = "signal",
          slot = function() end,
-         slot_params = { key = "value" },
       }
 
       assert.is_not_nil(slot.get_slot(id))
@@ -137,7 +131,6 @@ describe("Awesome-slot", function()
          target = target,
          signal = "signal",
          slot = function() end,
-         slot_params = { key = "value" },
       }
 
       assert.is_not_nil(s.id)
@@ -158,7 +151,6 @@ describe("Awesome-slot", function()
          signal = signal_name,
          slot = callback,
          slot_params = params,
-         connect = true,
       }
 
       target:emit_signal(signal_name)
@@ -180,7 +172,6 @@ describe("Awesome-slot", function()
          target = target,
          signal = signal_name,
          slot = callback,
-         connect = true,
       }
 
       target:emit_signal(signal_name, 1, 2, 3)

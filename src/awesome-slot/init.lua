@@ -107,7 +107,7 @@ end
 -- @tparam any params.target The slot target object.
 -- @tparam string params.signal The signal the slot connects to.
 -- @tparam function params.slot The callback function to connect to the signal.
--- @tparam table params.slot_params The parameters to pass to the callback
+-- @tparam[opt] table params.slot_params The parameters to pass to the callback
 --   function. (The signal will invoke the callback function with this table as
 --   parameter)
 -- @tparam[opt=true] boolean params.connect Connect the slot now.
