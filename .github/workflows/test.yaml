@@ -8,6 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Run Busted
-        uses: lunarmodules/busted@v2.2.0
+        uses: lunarmodules/busted@56e6d68204d1456afa77f1346bf4e050df65b629 # v2.3.0
