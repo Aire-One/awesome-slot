@@ -24,4 +24,4 @@ ldoc:
 	ldoc .
 
 test:
-	luarocks test
+	luarocks --local test
