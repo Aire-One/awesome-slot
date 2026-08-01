@@ -66,6 +66,7 @@ local awesome_slot = {
       tag = capi.tag,
       ruled_client = require "ruled.client",
       ruled_notification = require "ruled.notification",
+      naughty = require "naughty",
    },
 
    _private = {
