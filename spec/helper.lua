@@ -34,3 +34,5 @@ package.loaded["wibox.container.tile"] = {}
 package.loaded["awful.wallpaper"] = {}
 
 package.loaded["awful.layout"] = {}
+
+package.loaded["naughty"] = {}
