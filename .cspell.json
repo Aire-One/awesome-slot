@@ -3,7 +3,8 @@
   "version": "0.2",
   "useGitignore": true,
   "ignorePaths": [
-    ".git"
+    ".git",
+    "LICENSE"
   ],
   "enableGlobDot": true,
   "words": [
