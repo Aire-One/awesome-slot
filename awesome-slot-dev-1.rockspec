@@ -11,7 +11,7 @@ description = {
    summary = "A declarative API to connect signals for the AwesomeWM.",
    detailed = "A declarative API to connect signals for the AwesomeWM.",
    homepage = "https://github.com/Aire-One/awesome-slot",
-   license = "*** please specify a license ***",
+   license = "GPL-2",
    labels = {
       "awesome",
       "signals",
