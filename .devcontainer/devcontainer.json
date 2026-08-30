@@ -8,8 +8,7 @@
         "vscode": {
             "extensions": [
                 "sumneko.lua",
-                "JohnnyMorganz.stylua",
-                "tomblind.local-lua-debugger-vscode"
+                "JohnnyMorganz.stylua"
             ]
         }
     }
