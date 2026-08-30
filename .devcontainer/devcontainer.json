@@ -1,0 +1,16 @@
+{
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+    "features": {
+        "ghcr.io/Aire-One/devcontainer-features/lua:2.3.0": {},
+        "ghcr.io/Aire-One/devcontainer-features/luarocks:2.0.0": {}
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "sumneko.lua",
+                "JohnnyMorganz.stylua",
+                "tomblind.local-lua-debugger-vscode"
+            ]
+        }
+    }
+}

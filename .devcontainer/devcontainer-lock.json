@@ -1,0 +1,14 @@
+{
+  "features": {
+    "ghcr.io/Aire-One/devcontainer-features/lua:2.3.0": {
+      "version": "2.3.0",
+      "resolved": "ghcr.io/aire-one/devcontainer-features/lua@sha256:82517a88622f045da4d467f73dc1df68fbfcb984f0b96e2c8bcdd9d7809f9743",
+      "integrity": "sha256:82517a88622f045da4d467f73dc1df68fbfcb984f0b96e2c8bcdd9d7809f9743"
+    },
+    "ghcr.io/Aire-One/devcontainer-features/luarocks:2.0.0": {
+      "version": "2.0.0",
+      "resolved": "ghcr.io/aire-one/devcontainer-features/luarocks@sha256:304a8885fb62478b6af08061d9f53e0027986f8df53e30b6420201ccb79ca0a7",
+      "integrity": "sha256:304a8885fb62478b6af08061d9f53e0027986f8df53e30b6420201ccb79ca0a7"
+    }
+  }
+}
